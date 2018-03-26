@@ -1,6 +1,12 @@
 package com.aradisav.team.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Player {
@@ -8,24 +14,23 @@ public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
-    Long id;
+	private Long id;
 
     @Column
-    String firstName;
+	private String firstName;
 
     @Column
-    String lastName;
+	private String lastName;
 
     @Column
-    String username;
+	private String username;
 
     @Column
-    Integer skillIndex;
-
-
+	private Integer skillIndex;
+    
     @ManyToOne
     @JoinColumn(name = "team_id")
-    Team team;
+	private Team team;
 
 
     public String getFirstName() {
