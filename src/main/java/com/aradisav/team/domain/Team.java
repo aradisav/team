@@ -1,8 +1,14 @@
 package com.aradisav.team.domain;
 
-
-import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Team {
@@ -11,22 +17,18 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", updatable = false, nullable = false)
     Long id;
-
+	
+	@Column
+	@OneToMany(mappedBy = "team")
+	private Set<Player> players = new HashSet<>();
     @Column
-    String name;
-
+	private String name;
     @Column
-    Integer gamesWon;
-
+	private Integer gamesWon;
     @Column
-    Integer gamesLost;
-
+	private Integer gamesLost;
     @Column
-    Integer gamesPlayed;
-
-    @Column
-    @OneToMany(mappedBy = "team")
-    Set<Player> players;
+	private Integer gamesPlayed;
 
 
     public String getName() {
@@ -68,4 +70,10 @@ public class Team {
     public void setPlayers(Set<Player> players) {
         this.players = players;
     }
+	
+	public int getTotalSkillIndex() {
+		return players.stream().mapToInt(Player::getSkillIndex).sum();
+		
+	}
+    
 }
