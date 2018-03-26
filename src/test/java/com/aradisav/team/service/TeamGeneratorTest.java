@@ -1,5 +1,6 @@
 package com.aradisav.team.service;
 
+import static org.hamcrest.Matchers.emptyCollectionOf;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertNotNull;
@@ -66,5 +67,15 @@ public class TeamGeneratorTest {
 			log.info("" + t.getTotalSkillIndex());
 		}
 		
+	}
+	
+	@Test
+	public void generateBiasedTeamsInput() {
+		int numberOfTeams = 3;
+		int teamSize = 5;
+		
+		List<Team> teams = teamGenerator.generateBiasedTeams(players, teamSize, numberOfTeams);
+		
+		assertThat(teams, is(emptyCollectionOf(Team.class)));
 	}
 }
